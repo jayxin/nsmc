@@ -94,7 +94,14 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 
 \renewcommand{\cftsecfont}{\zihao{-4}\song}
 \renewcommand{\cftsecleader}{\cftdotfill{\cftsecdotsep}}
+\renewcommand{\cftsubsecleader}{\cftdotfill{\cftsecdotsep}}
+\renewcommand{\cftsubsubsecleader}{\cftdotfill{\cftsecdotsep}}
 \renewcommand{\cftsecaftersnumb}{\hskip.4em}
+\renewcommand{\cftsubsecaftersnumb}{\hskip.4em}
+\renewcommand{\cftsubsubsecaftersnumb}{\hskip.4em}
+
+\renewcommand{\cftsecindent}{0em}
+\renewcommand{\cftsubsecindent}{2em}
 % -----
 
 % 颜色定义 -------
@@ -134,6 +141,8 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 % 定制列表环境
 \RequirePackage{enumitem}
 
+\RequirePackage{setspace}
+
 % 下划线
 \RequirePackage{ulem}
 
@@ -156,7 +165,7 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 % 页面布局
 \geometry{top=2.54cm,bottom=2.54cm,left=3.17cm,right=3.17cm}
 
-\renewcommand*{\baselinestretch}{1.38}
+%\renewcommand*{\baselinestretch}{1.38}
 
 % 修改tabular 环境, 设置表格中的行间距为正文行间距.
 \let\mcm@oldtabular\tabular
@@ -186,6 +195,9 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 % 黑体
 \setCJKfamilyfont{hei}[AutoFakeBold]{SimHei}
 \newcommand*{\hei}{\CJKfamily{hei}}
+
+\setCJKfamilyfont{fzxbsjt}[AutoFakeBold,Path="fonts/"]{fzxbsjt.ttf}
+\newcommand*{\fzxbsjt}{\CJKfamily{fzxbsjt}}
 
 \setmainfont{Times New Roman}
 %\setmonofont{Courier New}
@@ -298,6 +310,47 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 }
 
 %% Document Markup
+
+\newcommand{\Title}[1]{\gdef\@title{#1}}
+\newcommand{\School}[1]{\gdef\@school{#1}}
+\newcommand{\TeamMember}[1]{\gdef\@teammember{#1}}
+\newcommand{\Instructor}[1]{\gdef\@instructor{#1}}
+
+% 封面
+\newcommand{\makecover}{%
+{\pdfbookmark[0]{封面}{makecover}
+
+  \thispagestyle{empty}
+  {\zihao{3} \hei \noindent
+    \makebox[4\ccwd][s]{作品编号}：{\zihao{3}\hei 1223343434}%
+    %\hfill \TranSecretLevel{\@permission}
+    %\\
+    %\makebox[5\ccwd][s]{论文编号}：{\ifthenelse{\equal{\@blindmode}{off}}{\bfseries \@studentid}{\bfseries XXX}}
+  }
+
+  \vspace{160pt}
+
+  \centering
+
+  \begin{spacing}{1.5}
+    \centerline{\zihao{2} \fzxbsjt 2025年(第十一届)全国大学生统计建模大赛}
+    \vspace{20pt}
+    \centerline{\ziju{0.4} \zihao{1} \fzxbsjt 参赛作品}
+  \end{spacing}
+
+  \vspace{160pt}
+  \begin{spacing}{1.8}
+    \ziju{0.2} \zihao{-3} \hei
+    \begin{tabular}{ll}
+      参赛学校:  & 清华大学 \\
+      论文题目:  & XX 相对贫困治理成效的统计测度研究 \\
+      参赛队员:  & 张三 李四 王五 \\
+      指导老师:  & 王富贵
+     \end{tabular}
+  \end{spacing}
+  \clearpage
+  %\ifthenelse{\equal{\@beginright}{off}}{\clearpage}{\clearautopage}
+}}
 
 % 生成封面, 使用\maketitle
 \renewcommand{\maketitle}{\par
@@ -437,8 +490,8 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 \setcounter{secnumdepth}{3}
 % 节标题格式, 居中, 使用\chinese命令修改计数器
 \def\@seccntformat#1{\csname the#1\endcsname\ }
-\renewcommand\thesection{\chinese{section}、}
-\renewcommand\thesubsection{（\chinese{subsection}）}
+\renewcommand\thesection{\chinese{section}、 }
+\renewcommand\thesubsection{（\chinese{subsection}） }
 \renewcommand\thesubsubsection{\arabic{subsubsection}.}
 %\renewcommand\section{\@startsection{section}{1}{\z@}%
  	%{-3.5ex \@plus -1ex \@minus -.2ex}%
@@ -463,10 +516,12 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Define new environment and command
-%% 摘要两个字设置为 4 号.
 %% 定义摘要环境
 \renewenvironment{abstract}{%
+    \centerline{\zihao{3}\fzxbsjt \@title}
+    \vspace*{3em}
     \centerline{\zihao{4}\hei \abstractname}
+    \vspace*{7pt}
 }{}
 
 \renewenvironment{quotation}
@@ -551,7 +606,7 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 % -----
 
 % 中文标题名称常量 -------
-\newcommand*{\nsmc@cap@contentsname}{目录}
+\newcommand*{\nsmc@cap@contentsname}{\centerline{\zihao{4}\hei 目录}}
 \newcommand*{\nsmc@cap@listfigurename}{插图清单}
 \newcommand*{\nsmc@cap@listtablename}{附表清单}
 \newcommand*{\nsmc@cap@refname}{参考文献}
