@@ -2,30 +2,10 @@
 \ProvidesClass{nsmc}
   [2026/04/08 v1.0 Standard LaTeX Template for NSMC]
 
-%% Inital Code
-\newif\if@mcm@bwprint\@mcm@bwprintfalse
-\newif\if@mcm@preface\@mcm@prefacetrue
-% tokens definition
-%%%% 承诺书
-\newcommand\mcm@tokens@keywords{}
-\newcommand*\mcm@tokens@tihao{}
-\newcommand*\mcm@tokens@baominghao{}
-\newcommand*\mcm@tokens@schoolname{}
-\newcommand*\mcm@tokens@membera{}
-\newcommand*\mcm@tokens@memberb{}
-\newcommand*\mcm@tokens@memberc{}
-\newcommand*\mcm@tokens@supervisor{}
-\newcommand*\mcm@tokens@yearinput{}
-\newcommand*\mcm@tokens@monthinput{}
-\newcommand*\mcm@tokens@dayinput{}
-%%%% 编号专用页
-% 没有
-%% Declaration of Options
-\DeclareOption{colorprint}{\@mcm@bwprintfalse}
-\DeclareOption{bwprint}{\@mcm@bwprinttrue}
-\DeclareOption{withoutpreface}{\@mcm@prefacefalse}
+% Declaration of Options
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
-%% Executing of Options
+
+% Executing of Options
 \ExecuteOptions{colorprint}
 \ProcessOptions\relax
 
@@ -86,11 +66,8 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 \RequirePackage[titles]{tocloft}
 \renewcommand{\cftdot}{$\cdot$}
 \renewcommand{\cftsecdotsep}{1.5}
-\setlength{\cftbeforesecskip}{7pt}
-\setlength{\cftbeforesubsecskip}{3pt}
-
-%\renewcommand{\cfttoctitlefont}{\hfill\zihao{4}\hei}
-%\renewcommand{\cftaftertoctitle}{\hfill}
+\setlength{\cftbeforesecskip}{4pt}
+\setlength{\cftbeforesubsecskip}{2pt}
 
 \renewcommand{\cftsecfont}{\zihao{-4}\song}
 \renewcommand{\cftsecleader}{\cftdotfill{\cftsecdotsep}}
@@ -100,8 +77,16 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 \renewcommand{\cftsubsecaftersnumb}{\hskip.4em}
 \renewcommand{\cftsubsubsecaftersnumb}{\hskip.4em}
 
+% 目录条目的缩进 -------
 \renewcommand{\cftsecindent}{0em}
 \renewcommand{\cftsubsecindent}{2em}
+\renewcommand{\cftsubsubsecindent}{2em}
+% -----
+
+% 表格与插图清单 -------
+\renewcommand{\cfttabfont}{表~}
+\renewcommand{\cftfigfont}{图~}
+% -----
 % -----
 
 % 颜色定义 -------
@@ -150,31 +135,30 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 \RequirePackage{calc}
 
 \RequirePackage[titletoc,title]{appendix}
-
 %\RequirePackage[title,toc,titletoc]{appendix}
 
 \RequirePackage{etoolbox}
 \AtBeginEnvironment{thebibliography}{%
-    \phantomsection
-    \addcontentsline{toc}{section}{\refname}
-    }
+  \phantomsection
+  \addcontentsline{toc}{section}{\refname}
+}
 
-% 超链接 hyperref 的设置
+% 超链接
 \RequirePackage{hyperref}
 
 % 页面布局
 \geometry{top=2.54cm,bottom=2.54cm,left=3.17cm,right=3.17cm}
 
-%\renewcommand*{\baselinestretch}{1.38}
+\renewcommand*{\baselinestretch}{1.65}
 
-% 修改tabular 环境, 设置表格中的行间距为正文行间距.
-\let\mcm@oldtabular\tabular
-\let\mcm@endoldtabular\endtabular
+% 修改tabular
+\let\nsmc@oldtabular\tabular
+\let\nsmc@endoldtabular\endtabular
 \renewenvironment{tabular}%
 	{\bgroup%
-	\renewcommand{\arraystretch}{1.38}%
-	\mcm@oldtabular}%
-	{\mcm@endoldtabular\egroup}
+	\renewcommand{\arraystretch}{1.0}%
+	\nsmc@oldtabular}%
+	{\nsmc@endoldtabular\egroup}
 
 % 每行缩进两个汉字
 \setlength\parindent{2em}
@@ -208,11 +192,13 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 %\setmonofont{Courier New}
 \setsansfont{Arial}
 
-\renewcommand\normalsize{%
-	\@setfontsize\normalsize{12.05}{14.45}%
-	\abovedisplayskip 12\p@ \@plus3\p@ \@minus7\p@
-	\abovedisplayshortskip \z@ \@plus3\p@
-	\belowdisplayshortskip 6.5\p@ \@plus3.5\p@ \@minus3\p@}
+\newcommand*{\xiaosi}{\zihao{-4}}
+
+%\renewcommand\normalsize{%
+	%\@setfontsize\normalsize{12.05}{14.45}%
+	%\abovedisplayskip 12\p@ \@plus3\p@ \@minus7\p@
+	%\abovedisplayshortskip \z@ \@plus3\p@
+	%\belowdisplayshortskip 6.5\p@ \@plus3.5\p@ \@minus3\p@}
 % -----
 
 % 数学环境 -------
@@ -246,17 +232,17 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 
 % 图表标题 -------
 \DeclareCaptionFont{song}{\songti}
-\DeclareCaptionFont{minusfour}{\zihao{-4}}
+\DeclareCaptionFont{xiaosi}{\zihao{-4}}
 \captionsetup[figure]{%
 	format=hang,   % 标题从第二行开始都有缩进, 应该和 justification=raggedright 的效果一样.
 	labelsep=quad, % 分隔符是一个空格
-	font={song,minusfour,bf}, % 图的字体, 宋体小四
+	font={song,xiaosi,bf}, % 图的字体, 宋体小四
 	position=bottom
 }
 \captionsetup[table]{%
 	format=hang,   % 标题从第二行开始都有缩进, 应该和 justification=raggedright 的效果一样.
 	labelsep=quad, % 分隔符是一个空格
-	font={song,minusfour,bf}, % 表的字体, 宋体小四
+	font={song,xiaosi,bf}, % 表的字体, 宋体小四
 	position=top
 }
 % -----
@@ -282,14 +268,10 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
   CJKbookmarks=true,
   bookmarksnumbered=true,
   bookmarksopen=true,
-  colorlinks, %注释掉此项则交叉引用为彩色边框(将colorlinks和pdfborder同时注释掉)
+  colorlinks, % 注释掉此项则交叉引用为彩色边框(将colorlinks和pdfborder同时注释掉)
   pdfborder=001,   %注释掉此项则交叉引用为彩色边框
   allcolors=black,
   breaklinks=true}%
-
-% \if@mcm@bwprint
-% \AtBeginDocument{\hypersetup{hidelinks}}
-% \else\relax\fi
 % -----
 
 % 代码环境 -------
@@ -308,56 +290,53 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
   {}
 % -----
 
-\def\cleardoublepage{\clearpage
-  \thispagestyle{empty}%
-  \pagenumbering{gobble}%
-  \hbox{}\newpage
-}
+% 论文基本信息 -------
+\newcommand{\Title}[1]{\gdef\nsmc@title{#1}}
+\newcommand{\School}[1]{\gdef\nsmc@school{#1}}
+\newcommand{\TeamMember}[1]{\gdef\nsmc@teammember{#1}}
+\newcommand{\Instructor}[1]{\gdef\nsmc@instructor{#1}}
+\newcommand{\WorkNumber}[1]{\gdef\nsmc@worknumber{#1}}
+\newcommand{\Year}[1]{\gdef\nsmc@year{#1}}
+\newcommand{\Period}[1]{\gdef\nsmc@period{#1}}
+% -----
 
-%% Document Markup
-
-\newcommand{\Title}[1]{\gdef\@title{#1}}
-\newcommand{\School}[1]{\gdef\@school{#1}}
-\newcommand{\TeamMember}[1]{\gdef\@teammember{#1}}
-\newcommand{\Instructor}[1]{\gdef\@instructor{#1}}
-\newcommand{\WorkNumber}[1]{\gdef\@worknumber{#1}}
-
-% 封面
+% 封面 -------
 \newcommand{\makecover}{%
 {\pdfbookmark[0]{封面}{makecover}
 
   \thispagestyle{empty}
   {\zihao{3} \hei \noindent
-    \makebox[4\ccwd][s]{作品编号}：\@worknumber%
+    \makebox[4\ccwd][s]{作品编号}：\nsmc@worknumber%
   }
 
   \vspace{160pt}
 
   \centering
-
   \begin{spacing}{1.5}
-    \centerline{\zihao{2} \fzxbsjt {\fzxbsjt 2026}年(第十二届)全国大学生统计建模大赛}
+    \centerline{\zihao{2} \fzxbsjt {\fzxbsjt \nsmc@year}年(\nsmc@period)全国大学生统计建模大赛}
     \vspace{20pt}
     \centerline{\ziju{0.4} \zihao{1} \fzxbsjt 参赛作品}
   \end{spacing}
 
   %\vspace{160pt}
   \vspace*{\fill}
+  \centering
   \begin{spacing}{0.7}
     \ziju{0.2} \zihao{-2} \fsgb
     \begin{tabular}{lc}
-      {参赛学校:}  & \@school \\[-10pt]
+      {参赛学校:}  & \nsmc@school \\[-10pt]
                                   & \rule{12cm}{.6pt} \\[20pt]
-      {论文题目:}  & \@title \\[-10pt]
+      {论文题目:}  & \nsmc@title \\[-10pt]
                                   & \rule{12cm}{.6pt} \\[20pt]
-      {参赛队员:}  & \@teammember \\[-10pt]
+      {参赛队员:}  & \nsmc@teammember \\[-10pt]
                                   & \rule{12cm}{.6pt} \\[20pt]
-      {指导老师:}  & \@instructor \\[-10pt]
+      {指导老师:}  & \nsmc@instructor \\[-10pt]
                                   & \rule{12cm}{.6pt} \\[20pt]
      \end{tabular}
   \end{spacing}
   \clearpage
 }}
+% -----
 
 % 中文标题名称设置 -------
 \renewcommand\contentsname{\nsmc@cap@contentsname}
@@ -371,110 +350,90 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 \renewcommand\abstractname{\nsmc@cap@abstractname}
 % -----
 
-% 中文标题格式设置
+% 中文标题格式设置 -------
 % 目录深度
 \setcounter{secnumdepth}{3}
-% 节标题格式, 居中, 使用\chinese命令修改计数器
+% 节标题格式
 \def\@seccntformat#1{\csname the#1\endcsname\ }
-\renewcommand\thesection{\chinese{section}、 }
-\renewcommand\thesubsection{（\chinese{subsection}） }
-\renewcommand\thesubsubsection{\arabic{subsubsection}.}
-%\renewcommand\section{\@startsection{section}{1}{\z@}%
- 	%{-3.5ex \@plus -1ex \@minus -.2ex}%
-	%{2.3ex \@plus.2ex}%
-	%{\centering\normalfont\Large\bfseries}}
-%\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
-	%{-3.25ex\@plus -1ex \@minus -.2ex}%
-	%{1.5ex \@plus .2ex}%
-  %{\normalfont\zihao{-3}\hei}}
-%\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
-	%{-3.25ex\@plus -1ex \@minus -.2ex}%
-	%{1.5ex \@plus .2ex}%
-  %{\normalfont\zihao{4}\kai}}
-%\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
-	%{3.25ex \@plus1ex \@minus.2ex}%
-	%{-1em}%
-  %{\normalfont\zihao{-4}\bfseries\song}}
-%\renewcommand\subparagraph{\@startsection{subparagraph}{5}{\parindent}%
-	 %{3.25ex \@plus1ex \@minus .2ex}%
-	 %{-1em}%
-	 %{\normalfont\normalsize\bfseries}}
+\renewcommand\thesection{\chinese{section}、}
+\renewcommand\thesubsection{（\chinese{subsection}）}
+\renewcommand\thesubsubsection{\hspace*{2em}\arabic{subsubsection}.}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Define new environment and command
-%% 定义摘要环境
+\RequirePackage{titlesec}
+\titleformat{\section}[hang]{\zihao{-3}\hei}{\thesection}{0em}{}
+\titleformat{\subsection}[hang]{\zihao{4}\kai}{\hspace*{2em}\thesubsection}{0em}{}
+\titleformat{\subsubsection}[hang]{\zihao{-4}\bfseries\song}{\thesubsubsection}{0em}{}
+
+\titlespacing{\section}{0pt}{*0.5}{*0.5}
+\titlespacing{\subsection}{0pt}{*0.5}{*0.5}
+\titlespacing{\subsubsection}{0pt}{*0.5}{*0.5}
+% -----
+
+% 摘要和关键词 -------
 \renewenvironment{abstract}{%
-    \centerline{\zihao{3}\fzxbsjt \@title}
+    \centerline{\zihao{3}\fzxbsjt \nsmc@title}
     \vspace*{3em}
     \centerline{\zihao{4}\hei \abstractname}
     \vspace*{7pt}
 }{}
 
-\renewenvironment{quotation}
-	{\list{}{\listparindent 2em%
-	 \itemindent \listparindent
-	 \rightmargin\z@
-	 \leftmargin\z@
-	 \parsep \z@ \@plus\p@}%
-	\item\relax}
-	{\endlist}
-
 \newcommand\keywords[1]{%
-	\renewcommand{\mcm@tokens@keywords}{#1}
-	%\par
-	%\vskip1ex
-	{\noindent\zihao{-4}\hei \nsmc@cap@keywordsname：}~{\mcm@tokens@keywords}
-	}
-% 定义附录
+	{\noindent\zihao{-4}\hei \nsmc@cap@keywordsname：}~{#1}
+}
+% -----
 
-% \renewcommand{\setthesection}{\appendixname\Alph{section}}
-% \renewcommand\appendix{\par
-	% \setcounter{section}{0}%
-	 % \setcounter{subsection}{0}%
-	% \gdef\thesection{\appendixname\@Alph\c@section}}
-% 重定义参考文献环境
+% 附录 -------
+\renewcommand{\setthesection}{\appendixname\Alph{section}}
+\renewcommand\appendix{
+  \clearpage
+  \phantomsection
+  \addcontentsline{toc}{section}{\appendixname}
+	\setcounter{section}{0}%
+	\setcounter{subsection}{0}%
+	%\gdef\thesection{\appendixname\@Alph\c@section}
+  \raggedright{\zihao{4}\hei \appendixname}
+  \par
+}
+% -----
+
+% 参考文献 -------
 \renewenvironment{thebibliography}[1]
-     {\section*{\refname}%
-      \@mkboth{\MakeUppercase\refname}{\MakeUppercase\refname}%
-      \list{\@biblabel{\@arabic\c@enumiv}}%
-           {\settowidth\labelwidth{\@biblabel{#1}}%
-            \leftmargin\labelwidth
-            \advance\leftmargin\labelsep
-            \@openbib@code
-            \usecounter{enumiv}%
-            \let\p@enumiv\@empty
-            \renewcommand\theenumiv{\@arabic\c@enumiv}}%
-      \sloppy
-      \clubpenalty4000
-      \@clubpenalty \clubpenalty
-      \widowpenalty4000%
-      \sfcode`\.\@m}
-     {\def\@noitemerr
-       {\@latex@warning{Empty `thebibliography' environment}}%
-      \endlist}
+  {\raggedright{\zihao{4} \heiti \refname}%
+  \@mkboth{\MakeUppercase\refname}{\MakeUppercase\refname}%
+  \list{\@biblabel{\@arabic\c@enumiv}}%
+        {\settowidth\labelwidth{\@biblabel{#1}}%
+        \leftmargin\labelwidth
+        \advance\leftmargin\labelsep
+        \@openbib@code
+        \usecounter{enumiv}%
+        \let\p@enumiv\@empty
+        \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+  \sloppy
+  \clubpenalty4000
+  \@clubpenalty \clubpenalty
+  \widowpenalty4000%
+  \sfcode`\.\@m}
+  {\def\@noitemerr
+    {\@latex@warning{Empty `thebibliography' environment}}%
+  \endlist}
+% -----
 
-\newcommand*\tihao[1]{%
-	\renewcommand{\mcm@tokens@tihao}{#1}}
-\newcommand*\baominghao[1]{%
-	\renewcommand{\mcm@tokens@baominghao}{#1}}
-\newcommand*\schoolname[1]{%
-	\renewcommand{\mcm@tokens@schoolname}{#1}}
-\newcommand*\membera[1]{%
-	\renewcommand{\mcm@tokens@membera}{#1}}
-\newcommand*\memberb[1]{%
-	\renewcommand{\mcm@tokens@memberb}{#1}}
-\newcommand*\memberc[1]{%
-	\renewcommand{\mcm@tokens@memberc}{#1}}
-\newcommand*\supervisor[1]{%
-	\renewcommand{\mcm@tokens@supervisor}{#1}}
-\newcommand*\yearinput[1]{%
-	\renewcommand{\mcm@tokens@yearinput}{#1}}
-\newcommand*\monthinput[1]{%
-	\renewcommand{\mcm@tokens@monthinput}{#1}}
-\newcommand*\dayinput[1]{%
-	\renewcommand{\mcm@tokens@dayinput}{#1}}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 表格与插图清单 -------
+\renewcommand{\listfigurename}{}
+\renewcommand{\listtablename}{}
+\newcommand{\listoffigsandtabs}{
+  \clearpage
+  \centerline{\zihao{4} \heiti 表格与插图清单}
+  \phantomsection
+  \addcontentsline{toc}{section}{表格与插图清单}
+  \vspace*{-\baselineskip}
+  \begingroup
+  \let\clearpage\relax
+  \listoftables
+  \listoffigures
+  \endgroup
+}
+% -----
 
 % 数学定理常量 -------
 \newcommand*{\nsmc@cap@definition}{定义}
@@ -504,36 +463,11 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 \newcommand*{\nsmc@cap@keywordsname}{关键词}
 % -----
 
- %%% 编号专用页中的常量
-\newcommand*\mcm@numberpage@string@headname{赛区评阅编号（由赛区组委会填写）：}
-\newcommand*\mcm@numberpage@string@titlea{\the\year 高教社杯全国大学生数学建模竞赛}
-\newcommand*\mcm@numberpage@string@titleb{编\hspace{.5em}号\hspace{.5em}专\hspace{.5em}用\hspace{.5em}页}
-\newcommand*\mcm@numberpage@string@appraiselog{赛区评阅记录（可供赛区评阅时使用）：}
-\newcommand\mcm@numberpage@string@reviewer{\shortstack{评\\ 阅\\ 人}}
-\newcommand\mcm@numberpage@string@remarks{\shortstack{备\\ 注}}
-\newcommand*\mcm@numberpage@string@unifiednum{送全国评阅统一编号（由赛区组委会填写）：}
-\newcommand*\mcm@numberpage@string@countrynum{全国评阅随机编号（由全国组委会填写）：}
-\newcommand\mcm@numberpage@string@inform{\quotation
-\noindent（{\bfseries\kai 请勿改动此页内容和格式。此编号专用页仅供赛区和全国评阅使用，参赛队打印后装订到纸质论文的第二页上。
-注意电子版论文中不得出现此页。}）
-\endquotation
-}
-%设置目录格式
-% 节的目录格式
-%\titlecontents{section}[0pt]{\vspace{2mm}\song}
- %{\thecontentslabel\hskip.5em}{}{\titlerule*[0.5pc]{.}\contentspage}
-% % 小节的目录格式
-% \titlecontents{subsection}[30pt]{\songti}
-% {\thecontentslabel\hskip.5em}{}{\titlerule*[0.5pc]{.}\contentspage}
-% \titlecontents{subsubsection}[55pt]{\songti}
-% {\thecontentslabel\hskip.5em}{}{\titlerule*[0.5pc]{.}\contentspage}
-
-\RequirePackage{titlesec}
-\titleformat{\section}[hang]{\zihao{-3}\hei}{\thesection}{1em}{}
-\titleformat{\subsection}[hang]{\zihao{4}\kai}{\thesubsection}{1em}{}
-\titleformat{\subsubsection}[hang]{\zihao{-4}\bfseries\song}{\hspace*{2em}\thesubsubsection}{1em}{}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
 
 \linespread{1.65}
+
+\newcommand{\fourthtitle}[2]{{\large{\textcircled{\small{#1}}}} #2}
 
 \endinput
 % vim: set fdm=marker fmr=\ -------,-----:

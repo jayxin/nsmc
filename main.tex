@@ -1,51 +1,61 @@
+\documentclass{commons/nsmc}
+
+% 额外添加宏包
 \input{commons/preamble.tex}
 
+% 论文基本信息
 \input{contents/info.tex}
 
-\Title{XX 相对贫困治理成效的统计测度研究}
-
 \begin{document}
-
 % 封面
-%\pagestyle{empty}
 \makecover
 
-
-%\cleardoublepage
+% 摘要与关键词 -------
 \pagenumbering{Roman}
 \setcounter{page}{1}
-
-% 摘要与关键词
 \input{contents/abstract.tex}
+% -----
 
-% 章节目录
+% 目录 -------
 \clearpage
-\setlength{\baselineskip}{24pt}
 \begin{center}
 \tableofcontents
 \end{center}
+% -----
 
 % 表格和插图清单
+\listoffigsandtabs
 
 % 正文 -------
-\cleardoublepage
+\clearpage
 \pagenumbering{arabic}
 \setcounter{page}{1}
 
-\section{持续多维相对贫困脱/返贫指数的测算思路}
+\input{contents/sections/s1.tex}
 
-\subsection{单维相对贫困的识别}
+\input{contents/sections/s2.tex}
 
-\subsubsection{单维相对贫困脱贫成效/返贫现象的识别}
+\input{contents/sections/s3.tex}
+
+\input{contents/sections/s4.tex}
+
+\input{contents/sections/s5.tex}
+
+\input{contents/sections/s6.tex}
+
+\input{contents/sections/s7.tex}
 % -----
 
 % 参考文献
 \input{contents/references.tex}
 
-% 附录
+% 附录 -------
+%\appendix
+
+%\input{contents/appendix/a1.tex}
+% -----
 
 % 致谢
 \input{contents/acknowlegement.tex}
-
 \end{document}
 % vim: set fdm=marker fmr=\ -------,-----:
