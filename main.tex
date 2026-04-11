@@ -10,26 +10,17 @@
 % 封面
 \makecover
 
-% 摘要与关键词 -------
-\pagenumbering{Roman}
-\setcounter{page}{1}
+% 摘要与关键词
 \input{contents/abstract.tex}
-% -----
 
-% 目录 -------
-\clearpage
-\begin{center}
-\tableofcontents
-\end{center}
-% -----
+% 目录
+\maketoc
 
 % 表格和插图清单
 \listoffigsandtabs
 
 % 正文 -------
-\clearpage
-\pagenumbering{arabic}
-\setcounter{page}{1}
+\maketitle
 
 \input{contents/sections/s1.tex}
 
@@ -50,9 +41,9 @@
 \input{contents/references.tex}
 
 % 附录 -------
-%\appendix
+\appendix
 
-%\input{contents/appendix/a1.tex}
+\input{contents/appendix/a1.tex}
 % -----
 
 % 致谢

@@ -21,7 +21,7 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 \fi
 
 % 支持中文
-\RequirePackage{ctex}
+\RequirePackage[fontset=none]{ctex}
 
 % 页面布局
 \RequirePackage{geometry}
@@ -41,6 +41,8 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 
 % 图片
 \RequirePackage{graphicx}
+
+\RequirePackage{float}
 
 % 表格 -------
 \RequirePackage{array}
@@ -84,8 +86,8 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 % -----
 
 % 表格与插图清单 -------
-\renewcommand{\cfttabfont}{表~}
-\renewcommand{\cftfigfont}{图~}
+\renewcommand{\cfttabfont}{\xiaosi\song 表~}
+\renewcommand{\cftfigfont}{\xiaosi\song 图~}
 % -----
 % -----
 
@@ -138,10 +140,6 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 %\RequirePackage[title,toc,titletoc]{appendix}
 
 \RequirePackage{etoolbox}
-\AtBeginEnvironment{thebibliography}{%
-  \phantomsection
-  \addcontentsline{toc}{section}{\refname}
-}
 
 % 超链接
 \RequirePackage{hyperref}
@@ -164,41 +162,110 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 \setlength\parindent{2em}
 
 % 字体 -------
-\setCJKmainfont{SimSun}
-\setCJKsansfont{SimHei}
-\setCJKmonofont{FangSong}
+\RequirePackage[T1]{fontenc}
 
-% 楷体
-\setCJKfamilyfont{kai}[AutoFakeBold,Path="fonts/"]{simkai.ttf}
-\newcommand*{\kai}{\CJKfamily{kai}}
-
-% 宋体
-\setCJKfamilyfont{song}[AutoFakeBold]{SimSun}
+% 宋体 -------
+\setCJKfamilyfont{song}[
+  AutoFakeBold,
+  Path="fonts/",
+  Extension=".ttf"
+]{simsun.ttf}
 \newcommand*{\song}{\CJKfamily{song}}
+% -----
 
-% 黑体
-\setCJKfamilyfont{hei}[AutoFakeBold]{SimHei}
+% 楷体 -------
+\setCJKfamilyfont{kai}[
+  AutoFakeBold,
+  Path="fonts/",
+  Extension=".ttf"
+]{simkai}
+\newcommand*{\kai}{\CJKfamily{kai}}
+% -----
+
+% 黑体 -------
+\setCJKfamilyfont{hei}[
+  AutoFakeBold,
+  Path="fonts/",
+  Extension=".ttf"
+]{simhei}
 \newcommand*{\hei}{\CJKfamily{hei}}
+% -----
 
-% 方正小标宋简体
-\setCJKfamilyfont{fzxbsjt}[AutoFakeBold,Path="fonts/"]{fzxbsjt.ttf}
+% 方正小标宋简体 -------
+\setCJKfamilyfont{fzxbsjt}[
+  AutoFakeBold,
+  Path="fonts/",
+  Extension=".ttf"
+]{fzxbsjt}
 \newcommand*{\fzxbsjt}{\CJKfamily{fzxbsjt}}
+% -----
 
-% 仿宋_GB2312
-\setCJKfamilyfont{fsgb}[AutoFakeBold,Path="fonts/"]{fs-gb2312.ttf}
+% 仿宋 GB2312 -------
+\setCJKfamilyfont{fsgb}[
+  AutoFakeBold,
+  Path="fonts/",
+  Extension=".ttf"
+]{fs-gb2312}
 \newcommand*{\fsgb}{\CJKfamily{fsgb}}
+% -----
 
-\setmainfont{Times New Roman}
+% 中文全局默认字体 -------
+\setCJKmainfont{simsun}[
+  AutoFakeBold,
+  Path="fonts/",
+  Extension=".ttf"
+]
+% -----
+
+% 中文全局无衬线字体 -------
+\setCJKsansfont{simhei}[
+  AutoFakeBold,
+  Path="fonts/",
+  Extension=".ttf"
+]
+% -----
+
+% 中文全局等宽字体 -------
+\setCJKmonofont{simhei}[
+  AutoFakeBold,
+  Path="fonts/",
+  Extension=".ttf"
+]
+% -----
+
+% 默认字体
+\setmainfont{times}[
+  AutoFakeBold,
+  Path="fonts/times/",
+  Extension=".ttf",
+  BoldFont={timesbd},
+  ItalicFont={timesi},
+  BoldItalicFont={timesbi}
+]
+% 无衬线字体
+\setsansfont{times}[
+  AutoFakeBold,
+  Path="fonts/times/",
+  Extension=".ttf",
+  BoldFont={timesbd},
+  ItalicFont={timesi},
+  BoldItalicFont={timesbi}
+]
+% 等宽字体
 %\setmonofont{Courier New}
-\setsansfont{Arial}
 
 \newcommand*{\xiaosi}{\zihao{-4}}
+\newcommand*{\sihao}{\zihao{4}}
 
-%\renewcommand\normalsize{%
-	%\@setfontsize\normalsize{12.05}{14.45}%
-	%\abovedisplayskip 12\p@ \@plus3\p@ \@minus7\p@
-	%\abovedisplayshortskip \z@ \@plus3\p@
-	%\belowdisplayshortskip 6.5\p@ \@plus3.5\p@ \@minus3\p@}
+\newfontfamily{\ffzxbsjt}{fzxbsjt}[
+  Path="fonts/",
+  Extension=".ttf",
+]
+
+\newfontfamily{\fhei}{simhei}[
+  Path="fonts/",
+  Extension=".ttf",
+]
 % -----
 
 % 数学环境 -------
@@ -231,7 +298,7 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 % -----
 
 % 图表标题 -------
-\DeclareCaptionFont{song}{\songti}
+\DeclareCaptionFont{song}{\song}
 \DeclareCaptionFont{xiaosi}{\zihao{-4}}
 \captionsetup[figure]{%
 	format=hang,   % 标题从第二行开始都有缩进, 应该和 justification=raggedright 的效果一样.
@@ -302,27 +369,27 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 
 % 封面 -------
 \newcommand{\makecover}{%
-{\pdfbookmark[0]{封面}{makecover}
+{%\pdfbookmark[0]{封面}{makecover}
 
   \thispagestyle{empty}
   {\zihao{3} \hei \noindent
-    \makebox[4\ccwd][s]{作品编号}：\nsmc@worknumber%
+    \makebox[4\ccwd][s]{作品编号}：{\fhei \nsmc@worknumber}%
   }
 
   \vspace{160pt}
 
   \centering
   \begin{spacing}{1.5}
-    \centerline{\zihao{2} \fzxbsjt {\fzxbsjt \nsmc@year}年(\nsmc@period)全国大学生统计建模大赛}
+    \centerline{\zihao{2} \fzxbsjt {\ffzxbsjt \nsmc@year}年(\nsmc@period)全国大学生统计建模大赛}
     \vspace{20pt}
     \centerline{\ziju{0.4} \zihao{1} \fzxbsjt 参赛作品}
   \end{spacing}
 
   %\vspace{160pt}
-  \vspace*{\fill}
+  \vspace*{200pt}
   \centering
   \begin{spacing}{0.7}
-    \ziju{0.2} \zihao{-2} \fsgb
+    \ziju{0.1} \zihao{-2} \fsgb
     \begin{tabular}{lc}
       {参赛学校:}  & \nsmc@school \\[-10pt]
                                   & \rule{12cm}{.6pt} \\[20pt]
@@ -336,6 +403,16 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
   \end{spacing}
   \clearpage
 }}
+% -----
+
+% 致谢 -------
+\newcommand{\makeacknowlegement}{
+  \clearpage
+  \phantomsection
+  \addcontentsline{toc}{section}{{致谢}}
+  \centerline{\sihao \hei 致谢}
+  \vspace*{2em}
+}
 % -----
 
 % 中文标题名称设置 -------
@@ -370,11 +447,19 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 % -----
 
 % 摘要和关键词 -------
+\AtBeginEnvironment{abstract}{%
+  \phantomsection
+  \addcontentsline{toc}{section}{\abstractname}
+  \pagenumbering{Roman}
+  \setcounter{page}{1}
+}
+
 \renewenvironment{abstract}{%
     \centerline{\zihao{3}\fzxbsjt \nsmc@title}
     \vspace*{3em}
     \centerline{\zihao{4}\hei \abstractname}
     \vspace*{7pt}
+    \xiaosi\song
 }{}
 
 \newcommand\keywords[1]{%
@@ -390,15 +475,19 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
   \addcontentsline{toc}{section}{\appendixname}
 	\setcounter{section}{0}%
 	\setcounter{subsection}{0}%
-	%\gdef\thesection{\appendixname\@Alph\c@section}
-  \raggedright{\zihao{4}\hei \appendixname}
+  {\raggedright{\zihao{4}\hei \appendixname}}
   \par
 }
 % -----
 
 % 参考文献 -------
+\AtBeginEnvironment{thebibliography}{%
+  \phantomsection
+  \addcontentsline{toc}{section}{\refname}
+}
+
 \renewenvironment{thebibliography}[1]
-  {\raggedright{\zihao{4} \heiti \refname}%
+  {\raggedright{\zihao{4} \hei \refname}%
   \@mkboth{\MakeUppercase\refname}{\MakeUppercase\refname}%
   \list{\@biblabel{\@arabic\c@enumiv}}%
         {\settowidth\labelwidth{\@biblabel{#1}}%
@@ -423,7 +512,7 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 \renewcommand{\listtablename}{}
 \newcommand{\listoffigsandtabs}{
   \clearpage
-  \centerline{\zihao{4} \heiti 表格与插图清单}
+  \centerline{\zihao{4} \hei 表格与插图清单}
   \phantomsection
   \addcontentsline{toc}{section}{表格与插图清单}
   \vspace*{-\baselineskip}
@@ -432,6 +521,7 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
   \listoftables
   \listoffigures
   \endgroup
+  \clearpage
 }
 % -----
 
@@ -463,10 +553,28 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 \newcommand*{\nsmc@cap@keywordsname}{关键词}
 % -----
 
+\renewcommand{\maketitle}{
+  \pagenumbering{arabic}
+  \setcounter{page}{1}
+  \centerline{\zihao{3}\fzxbsjt \nsmc@title}
+  \vspace*{2em}
+  \xiaosi\song
+}
+
+\newcommand{\maketoc}{
+  \clearpage
+  \begin{center}
+  \tableofcontents
+  \end{center}
+}
+
+\newcommand{\upcite}[1]{\textsuperscript{\textsuperscript{\cite{#1}}}}
+
 \newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
 
 \linespread{1.65}
 
+% 四级标题
 \newcommand{\fourthtitle}[2]{{\large{\textcircled{\small{#1}}}} #2}
 
 \endinput
