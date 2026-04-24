@@ -2,6 +2,7 @@
 
 - National Statistical Modeling Competition
 - 全国统计建模大赛 LaTeX 模板
+- 项目地址: [nsmc](https://github.com/jayxin/nsmc)
 - 作者: [Jay Xin](https://github.com/jayxin)/[objout](https://github.com/objout)
 
 ## 文件列表
@@ -39,7 +40,7 @@
 │       ├── timesbi.ttf
 │       ├── timesi.ttf
 │       └── times.ttf
-├── latexmkrc
+├── latexmkrc 工程文件
 ├── LICENSE.txt 使用许可
 ├── main.tex **编译入口文件**
 └── README.md 说明
@@ -51,7 +52,7 @@
 - 操作系统 - Linux
 - LaTeX 发行版 - TeXLive 2023
 
-### 使用 xelatex 编译
+### 方法1-使用 xelatex 编译
 
 需手动编译多次，目录等内容才能正确显示。
 
@@ -59,12 +60,12 @@
 xelatex main
 ```
 
-### 使用 latexmk 编译
+### 方法2-使用 latexmk 编译
 
 会自动编译多次。
 
 ```sh
-latexmk
+latexmk main
 ```
 
 <!-- vim: set noet: -->
