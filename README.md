@@ -8,42 +8,33 @@
 ## 文件列表
 
 ```none
-.
-├── commons 模板
-│   ├── nsmc.cls 模板
-│   └── preamble.tex 用户自定义添加宏包
-├── contents 论文内容
-│   ├── abstract.tex 摘要和关键词
+./
+├── LICENSE.txt 使用许可
+├── README.md 项目说明
+├── latexmkrc 工程文件
+├── main.tex **编译入口文件**
+├── commons/ 模板
+│   ├── nsmc.cls 基础模板
+│   └── preamble.tex 用户额外添加宏包
+├── contents/ 内容
+│   ├── abstract.tex 摘要
 │   ├── acknowlegement.tex 致谢
-│   ├── appendix 附录
-│   │   └── a1.tex
 │   ├── info.tex 论文基本信息
 │   ├── references.tex 参考文献
-│   └── sections 正文
-│       ├── s1.tex
-│       ├── s2.tex
-│       ├── s3.tex
-│       ├── s4.tex
-│       ├── s5.tex
-│       ├── s6.tex
-│       └── s7.tex
-├── figures 图
-│   └── latex.jpeg
-├── fonts 字体文件
-│   ├── fs-gb2312.ttf 仿宋 GB2312
-│   ├── fzxbsjt.ttf 方正小标宋简体
-│   ├── simhei.ttf 黑体
-│   ├── simkai.ttf 楷体
-│   ├── simsun.ttf 宋体
-│   └── times Times New Roman
-│       ├── timesbd.ttf
-│       ├── timesbi.ttf
-│       ├── timesi.ttf
-│       └── times.ttf
-├── latexmkrc 工程文件
-├── LICENSE.txt 使用许可
-├── main.tex **编译入口文件**
-└── README.md 说明
+│   ├── appendix/ 附录
+│   └── sections/ 正文
+├── figures/ 图
+└── fonts/ 字体
+    ├── fs-gb2312.ttf 仿宋 GB2312
+    ├── fzxbsjt.ttf 方正小标宋简体
+    ├── simhei.ttf 黑体
+    ├── simkai.ttf 楷体
+    ├── simsun.ttf 宋体
+    └── times/ Times New Roman
+        ├── times.ttf 常规(Regular)
+        ├── timesbd.ttf 粗体(BolD)
+        ├── timesbi.ttf 粗斜体(Bold and Italic)
+        └── timesi.ttf 斜体(Italic)
 ```
 
 ## 使用说明
