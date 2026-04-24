@@ -1,6 +1,9 @@
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesClass{nsmc}
-  [2026/04/08 v1.0 Standard LaTeX Template for NSMC]
+\IfFileExists{nsmc.cls}{
+  \ProvidesClass{nsmc}[2026/04/08 v1.0 Standard LaTeX Template for NSMC]
+}{
+  \ProvidesClass{commons/nsmc}[2026/04/08 v1.0 Standard LaTeX Template for NSMC]
+}
 
 % Declaration of Options
 \DeclareOption{draft}{\PassOptionsToPackage{draft}{graphicx}}
@@ -330,7 +333,7 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 
 % 超链接 -------
 \hypersetup{%
-  xetex,
+  %xetex,
   % unicode=false, % hyperref 和 xetex 同时使用时不能开启 Unicode 选项.
   pdfstartview=FitH,
   CJKbookmarks=true,
@@ -578,6 +581,7 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 \linespread{1.65}
 
 % 四级标题
+\RequirePackage{lmodern}
 \newcommand{\fourthtitle}[2]{{\large{\textcircled{\small{#1}}}} #2}
 
 \endinput
