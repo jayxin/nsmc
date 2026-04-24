@@ -3,6 +3,7 @@
   [2026/04/08 v1.0 Standard LaTeX Template for NSMC]
 
 % Declaration of Options
+\DeclareOption{draft}{\PassOptionsToPackage{draft}{graphicx}}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 
 % Executing of Options
@@ -371,6 +372,8 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 \newcommand{\makecover}{%
 {%\pdfbookmark[0]{封面}{makecover}
 
+  % fix page already defined warning
+  \pagenumbering{Alph}
   \thispagestyle{empty}
   {\zihao{3} \hei \noindent
     \makebox[4\ccwd][s]{作品编号}：{\fhei \nsmc@worknumber}%
