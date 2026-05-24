@@ -15,7 +15,8 @@
 - National Statistical Modeling Competition
 - 全国统计建模大赛 LaTeX 模板
 - 项目地址: [nsmc](https://github.com/jayxin/nsmc)
-- 作者: [jayxin](https://github.com/jayxin)/[objout](https://github.com/objout)
+- 主要作者: [jayxin](https://github.com/jayxin)/[objout](https://github.com/objout)
+- 本项目贡献者列表见**contributors.md**文件
 
 ## 文件列表
 
@@ -23,6 +24,7 @@
 ./
 ├── LICENSE.txt 使用许可
 ├── README.md 项目说明
+├── contributors.md 贡献者列表
 ├── latexmkrc latexmk 配置文件
 ├── main.tex **主文档(编译入口文件)**
 ├── commons/ 模板
