@@ -397,13 +397,13 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
   \begin{spacing}{0.7}
     \ziju{0.1} \zihao{-2} \fsgb
     \begin{tabular}{lc}
-      {参赛学校:}  & \nsmc@school \\[-10pt]
+      {参赛学校:}  & \parbox[t]{12cm}{\centering \nsmc@school} \\[-10pt]
                                   & \rule{12cm}{.6pt} \\[20pt]
-      {论文题目:}  & \nsmc@title \\[-10pt]
+      {论文题目:}  & \parbox[t]{12cm}{\centering\linespread{1.3}\selectfont \nsmc@title} \\[-10pt]
                                   & \rule{12cm}{.6pt} \\[20pt]
-      {参赛队员:}  & \nsmc@teammember \\[-10pt]
+      {参赛队员:}  & \parbox[t]{12cm}{\centering \nsmc@teammember} \\[-10pt]
                                   & \rule{12cm}{.6pt} \\[20pt]
-      {指导老师:}  & \nsmc@instructor \\[-10pt]
+      {指导老师:}  & \parbox[t]{12cm}{\centering \nsmc@instructor} \\[-10pt]
                                   & \rule{12cm}{.6pt} \\[20pt]
      \end{tabular}
   \end{spacing}
@@ -461,7 +461,7 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 }
 
 \renewenvironment{abstract}{%
-    \centerline{\zihao{3}\fzxbsjt \nsmc@title}
+    {\centering \zihao{3}\fzxbsjt \nsmc@title \par}
     \vspace*{3em}
     \centerline{\zihao{4}\hei \abstractname}
     \vspace*{7pt}
@@ -562,7 +562,7 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 \renewcommand{\maketitle}{
   \pagenumbering{arabic}
   \setcounter{page}{1}
-  \centerline{\zihao{3}\fzxbsjt \nsmc@title}
+  {\centering \zihao{3}\fzxbsjt \nsmc@title \par}
   \vspace*{2em}
   \xiaosi\song
 }
