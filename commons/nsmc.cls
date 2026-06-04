@@ -5,12 +5,21 @@
   \ProvidesClass{commons/nsmc}[2026/04/08 v1.0 Standard LaTeX Template for NSMC]
 }
 
+\newif\ifsourceseries
+
 % Declaration of Options
 \DeclareOption{draft}{\PassOptionsToPackage{draft}{graphicx}}
+
+% 思源系列字体选项
+\DeclareOption{sourceseries}{\sourceseriestrue}
+% sim系列字体选项
+\DeclareOption{simseries}{\sourceseriesfalse}
+
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 
 % Executing of Options
-\ExecuteOptions{colorprint}
+% 默认思源系列
+\ExecuteOptions{sourceseries}
 \ProcessOptions\relax
 
 % 基础模板
@@ -76,6 +85,7 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 \setlength{\cftbeforesubsecskip}{2pt}
 
 \renewcommand{\cftsecfont}{\zihao{-4}\song}
+\renewcommand{\cftsecpagefont}{\zihao{-4}\song}
 \renewcommand{\cftsecleader}{\cftdotfill{\cftsecdotsep}}
 \renewcommand{\cftsubsecleader}{\cftdotfill{\cftsecdotsep}}
 \renewcommand{\cftsubsubsecleader}{\cftdotfill{\cftsecdotsep}}
@@ -169,92 +179,135 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 \RequirePackage[T1]{fontenc}
 
 % 宋体 -------
-\setCJKfamilyfont{song}[
-  AutoFakeBold,
-  Path="fonts/",
-  Extension=".ttf"
-]{simsun.ttf}
+\ifsourceseries
+  \setCJKfamilyfont{song}[
+    Path={fonts/source-series/},
+    Extension={.ttf},
+    BoldFont={SourceHanSerifCN-SemiBold},
+  ]{SourceHanSerifCN-Regular}
+\else
+  \setCJKfamilyfont{song}[
+    Path={fonts/sim-series/},
+    Extension={.ttf},
+    AutoFakeBold,
+  ]{simsun}
+\fi
+
 \newcommand*{\song}{\CJKfamily{song}}
 % -----
 
 % 楷体 -------
 \setCJKfamilyfont{kai}[
+  Path={fonts/sim-series/},
+  Extension={.ttf},
   AutoFakeBold,
-  Path="fonts/",
-  Extension=".ttf"
 ]{simkai}
+
 \newcommand*{\kai}{\CJKfamily{kai}}
 % -----
 
 % 黑体 -------
-\setCJKfamilyfont{hei}[
-  AutoFakeBold,
-  Path="fonts/",
-  Extension=".ttf"
-]{simhei}
+\ifsourceseries
+  \setCJKfamilyfont{hei}[
+    Path={fonts/source-series/},
+    Extension={.ttf},
+  ]{SourceHanSansCN-Regular}
+\else
+  \setCJKfamilyfont{hei}[
+    Path={fonts/sim-series/},
+    Extension={.ttf},
+  ]{simhei}
+\fi
+
 \newcommand*{\hei}{\CJKfamily{hei}}
 % -----
 
 % 方正小标宋简体 -------
 \setCJKfamilyfont{fzxbsjt}[
+  Path={fonts/},
+  Extension={.ttf},
   AutoFakeBold,
-  Path="fonts/",
-  Extension=".ttf"
 ]{fzxbsjt}
+
 \newcommand*{\fzxbsjt}{\CJKfamily{fzxbsjt}}
 % -----
 
 % 仿宋 GB2312 -------
 \setCJKfamilyfont{fsgb}[
+  Path={fonts/},
+  Extension={.ttf},
   AutoFakeBold,
-  Path="fonts/",
-  Extension=".ttf"
 ]{fs-gb2312}
+
 \newcommand*{\fsgb}{\CJKfamily{fsgb}}
 % -----
 
 % 中文全局默认字体 -------
-\setCJKmainfont{simsun}[
-  AutoFakeBold,
-  Path="fonts/",
-  Extension=".ttf"
-]
+\ifsourceseries
+  \setCJKmainfont{SourceHanSerifCN-Regular}[
+    Path={fonts/source-series/},
+    Extension={.ttf},
+    BoldFont={SourceHanSerifCN-SemiBold},
+  ]
+\else
+  \setCJKmainfont{simsun}[
+    Path={fonts/sim-series/},
+    Extension={.ttf},
+    AutoFakeBold,
+  ]
+\fi
 % -----
 
 % 中文全局无衬线字体 -------
-\setCJKsansfont{simhei}[
-  AutoFakeBold,
-  Path="fonts/",
-  Extension=".ttf"
-]
+\ifsourceseries
+  \setCJKsansfont{SourceHanSansCN-Regular}[
+    Path={fonts/source-series/},
+    Extension={.ttf},
+  ]
+\else
+  \setCJKsansfont{simhei}[
+    Path={fonts/sim-series/},
+    Extension={.ttf},
+  ]
+\fi
 % -----
 
 % 中文全局等宽字体 -------
-\setCJKmonofont{simhei}[
+\ifsourceseries
+  \setCJKsansfont{SourceHanSansCN-Regular}[
+    Path={fonts/source-series/},
+    Extension={.ttf},
+  ]
+\else
+  \setCJKmonofont{simhei}[
+    Path={fonts/sim-series/},
+    Extension={.ttf},
+  ]
+\fi
+% -----
+
+% 默认字体 -------
+\setmainfont{times}[
+  Path={fonts/times/},
+  Extension={.ttf},
+  BoldFont={timesbd},
+  ItalicFont={timesi},
+  BoldItalicFont={timesbi},
   AutoFakeBold,
-  Path="fonts/",
-  Extension=".ttf"
 ]
 % -----
 
-% 默认字体
-\setmainfont{times}[
-  AutoFakeBold,
-  Path="fonts/times/",
-  Extension=".ttf",
-  BoldFont={timesbd},
-  ItalicFont={timesi},
-  BoldItalicFont={timesbi}
-]
-% 无衬线字体
+% 无衬线字体 -------
 \setsansfont{times}[
-  AutoFakeBold,
-  Path="fonts/times/",
-  Extension=".ttf",
+  Path={fonts/times/},
+  Extension={.ttf},
   BoldFont={timesbd},
   ItalicFont={timesi},
-  BoldItalicFont={timesbi}
+  BoldItalicFont={timesbi},
+  AutoFakeBold,
 ]
+% -----
+
 % 等宽字体
 %\setmonofont{Courier New}
 
@@ -262,14 +315,21 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 \newcommand*{\sihao}{\zihao{4}}
 
 \newfontfamily{\ffzxbsjt}{fzxbsjt}[
-  Path="fonts/",
-  Extension=".ttf",
+  Path={fonts/},
+  Extension={.ttf},
 ]
 
-\newfontfamily{\fhei}{simhei}[
-  Path="fonts/",
-  Extension=".ttf",
-]
+\ifsourceseries
+  \newfontfamily{\fhei}{SourceHanSansCN-Regular}[
+    Path={fonts/source-series/},
+    Extension={.ttf},
+  ]
+\else
+  \newfontfamily{\fhei}{simhei}[
+    Path={fonts/sim-series/},
+    Extension={.ttf},
+  ]
+\fi
 % -----
 
 % 数学环境 -------

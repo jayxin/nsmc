@@ -2,11 +2,12 @@
 
 * [NSMC](#nsmc)
 	* [文件列表](#文件列表)
-	* [使用说明](#使用说明)
+	* [编译](#编译)
 		* [本地编译](#本地编译)
 			* [方法1-用 xelatex 编译](#方法1-用-xelatex-编译)
 			* [方法2-用 latexmk 编译](#方法2-用-latexmk-编译)
 		* [在线编译](#在线编译)
+	* [文档类选项说明](#文档类选项说明)
 
 <!-- vim-markdown-toc -->
 
@@ -51,7 +52,7 @@
         └── timesi.ttf 斜体(Italic)
 ```
 
-## 使用说明
+## 编译
 
 ### 本地编译
 
@@ -97,5 +98,29 @@ latexmk -C main
 	+ 编译器: `xelatex`
 	+ TeXLive 版本: 2023
 	+ 主文档(Main Document): main.tex
+
+## 文档类选项说明
+
+本项目文档类(Document Class)目前支持 2 个选项:
+- `draft`: 是否嵌入图片和代码, 默认嵌入
+- `sourceseries`: 是否使用思源系列字体(主要是宋体和黑体), 默认使用思源
+
+加入思源系列字体的原因是 Sim 系列的字体不提供粗体, 使用 Sim 系列想用粗体就要用伪粗体(AutoFakeBold), 但伪粗体效果不佳，会导致显示的粗体过黑。
+
+使用思源系列:
+
+```latex
+% 默认即为思源系列
+\documentclass{commons/nsmc}
+
+% 思源字体, 同时开启 draft
+\documentclass[sourceseries,draft]{commons/nsmc}
+```
+
+使用 Sim 系列:
+
+```latex
+\documentclass[simseries]{commons/nsmc}
+```
 
 <!-- vim: set noet: -->
