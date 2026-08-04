@@ -13,8 +13,8 @@
 
 # NSMC
 
-- National Statistical Modeling Competition
-- 全国统计建模大赛 LaTeX 模板
+- National College Student Statistical Modeling Competition
+- 全国大学生统计建模大赛 LaTeX 模板
 - 项目地址: [nsmc](https://github.com/jayxin/nsmc)
 - 主要作者: [jayxin](https://github.com/jayxin)/[objout](https://github.com/objout)
 - 本项目贡献者列表见**contributors.md**文件
