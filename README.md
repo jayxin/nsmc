@@ -38,18 +38,8 @@
 │   ├── references.tex 参考文献
 │   ├── appendix/ 附录
 │   └── sections/ 正文
-├── figures/ 图
-└── fonts/ 字体
-    ├── fs-gb2312.ttf 仿宋 GB2312
-    ├── fzxbsjt.ttf 方正小标宋简体
-    ├── simhei.ttf 黑体
-    ├── simkai.ttf 楷体
-    ├── simsun.ttf 宋体
-    └── times/ Times New Roman
-        ├── times.ttf 常规(Regular)
-        ├── timesbd.ttf 粗体(BolD)
-        ├── timesbi.ttf 粗斜体(Bold and Italic)
-        └── timesi.ttf 斜体(Italic)
+├── figures/ 文章用到的图片文件
+└── fonts/ 存放字体文件
 ```
 
 ## 编译
